@@ -3,14 +3,15 @@ import styles from './styles.module.css';
 
 const Home = ({ username, setUsername, room, setRoom, socket }) => {
     const navigate = useNavigate();
-
     const joinRoom = () => {
         if (room !== '' && username !== '') {
             socket.emit('join_room', { username, room });
             navigate('/chat', { replace: true }); // Add this
+            localStorage.setItem("dataRoom", JSON.stringify({ username, room, display: false }))
         }
-
     };
+
+
 
     return (
         <div className={styles.container}>
